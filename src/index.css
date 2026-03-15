@@ -1,1 +1,36 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: Rubik;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url("./assets/fonts/Rubik-VariableFont_wght.ttf") format("truetype");
+}
+
+@theme {
+    --color-vivid-violet: hsl(277, 91%, 56%);
+    --color-dark-slate: hsl(216, 25%, 25%);
+    --color-steel-blue: hsl(215, 27%, 32%);
+    --color-slate-gray: hsl(219, 13%, 44%);
+    --color-light-blue: hsl(216, 47%, 78%);
+    --color-ghost-white: hsl(220, 38%, 97%);
+    --color-spring-green: hsl(151, 70%, 50%);
+    --color-soft-red: hsl(0, 82%, 63%);
+    /*Font*/
+    --font-display: "Rubik", sans-serif;
+
+    --text-display: 9rem;
+    --text-display--line-height: 100%;
+
+    --text-heading-large: 4rem;
+    --text-heading-large--line-height: 100%;
+
+    --text-heading-medium: 2.25rem;
+    --text-heading-medium--line-height: 100%;
+
+    --text-heading-small: 1.75rem;
+    --text-heading-small--line-height: 100%;
+
+    --text-body: 0.75rem;
+    --text-body--line-height: 150%;
+}
