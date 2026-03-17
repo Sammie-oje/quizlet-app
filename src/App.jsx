@@ -1,5 +1,5 @@
 import Header from "./components/Header.jsx";
-import StartMenu from "./components/StartMenu/StartMenu.jsx";
+import StartMenu from "./pages/StartMenu/StartMenu.jsx";
 
 function App() {
     return (
