@@ -4,15 +4,14 @@ import AnswerList from "../../components/AnswerList.jsx";
 
 function Question() {
     return (
-        <section className="pt-8 px-6 grid gap-10">
+        <section className="pt-8 px-6 grid gap-10 md:w-[640px] md:gap-16">
             <fieldset className="contents">
-                <div className="flex flex-col gap-6">
-                    <legend className="flex flex-col gap-3">
-                        <span className="text-sm/[1.5] italic text-slate-gray">
+                <div className="flex flex-col gap-6 md:gap-10">
+                    <legend className="flex flex-col gap-3 md:gap-[27px]">
+                        <span className="text-sm/[1.5] italic text-slate-gray md:text-xl/[1.5]">
                             Question 6 of 10
                         </span>
-
-                        <h3 className="text-xl/[1.2] font-medium text-dark-slate">
+                        <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2]">
                             Which of these color contrast ratios define the
                             minimum WCAG 2.1 Level AA requirement for normal
                             text?
@@ -21,11 +20,12 @@ function Question() {
                     <ProgressBar />
                 </div>
 
-                <div className="flex flex-col gap-3">
-                    <ul className="contents">
-                        <AnswerList answer={"4.5 : 1"} letter={"A"}/>
-                        <AnswerList answer={"3 : 1"} letter={"B"}/><AnswerList answer={"2.5 : 1"} letter={"C"}/>
-                        <AnswerList answer={"5 : 1"} letter={"D"}/>
+                <div className="flex flex-col gap-3 md:gap-8">
+                    <ul className="flex flex-col gap-3 md:gap-6">
+                        <AnswerList answer={"4.5 : 1"} letter={"A"} />
+                        <AnswerList answer={"3 : 1"} letter={"B"} />
+                        <AnswerList answer={"2.5 : 1"} letter={"C"} />
+                        <AnswerList answer={"5 : 1"} letter={"D"} />
                     </ul>
                     <Button>Submit Answer</Button>
                 </div>
