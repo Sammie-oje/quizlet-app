@@ -11,8 +11,8 @@ function App() {
                 text={"Accessibility"}
                 bgColor={"#F6E7FF"}
             />
-            <Question />
-            {/* <StartMenu/> */}
+            {/*  <Question />*/}
+            <StartMenu />
         </>
     );
 }
