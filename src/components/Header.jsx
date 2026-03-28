@@ -1,24 +1,10 @@
 import darkMoonIcon from "../assets/images/icon-moon-dark.svg";
 import darkSunIcon from "../assets/images/icon-sun-dark.svg";
 
-function Header({ src, text, bgColor }) {
+function Header({ children}) {
     return (
         <header className="py-4 px-6 flex items-center justify-between md:w-[640px]">
-            <div className="flex items-center justify-between gap-4 md:gap-6">
-                <div
-                    className="size-10 flex justify-center items-center rounded-md md:size-14 md:rounded-lg"
-                    style={{ backgroundColor: bgColor }}
-                >
-                    <img
-                        className="size-[28.57px] md:size-10"
-                        src={src}
-                        alt={`${text}-icon`}
-                    />
-                </div>
-                <span className="text-lg font-medium md:text-heading-small">
-                    {text}
-                </span>
-            </div>
+            {children}
 
             <div className="flex gap-2 items-center justify-between md:gap-4">
                 <img
