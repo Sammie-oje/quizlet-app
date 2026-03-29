@@ -1,3 +1,4 @@
+
 import SubjectList from "./SubjectList.jsx";
 
 function StartMenu() {
@@ -17,3 +18,4 @@ function StartMenu() {
     );
 }
 export default StartMenu;
+

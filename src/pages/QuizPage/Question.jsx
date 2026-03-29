@@ -1,4 +1,5 @@
 import Button from "../../components/Button.jsx";
+import { Link } from "react-router-dom";
 import ProgressBar from "../../components/ProgressBar.jsx";
 import AnswerList from "../../components/AnswerList.jsx";
 
@@ -27,7 +28,10 @@ function Question() {
                         <AnswerList answer={"2.5 : 1"} letter={"C"} />
                         <AnswerList answer={"5 : 1"} letter={"D"} />
                     </ul>
-                    <Button>Submit Answer</Button>
+
+                    <Link to="/result">
+                        <Button>Submit Answer</Button>
+                    </Link>
                 </div>
             </fieldset>
         </section>

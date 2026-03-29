@@ -1,4 +1,5 @@
 import Image from "../../components/Image.jsx";
+import { Link } from "react-router-dom";
 import Button from "../../components/Button.jsx";
 import accessIcon from "../../assets/images/icon-accessibility.svg";
 
@@ -12,11 +13,7 @@ function Result() {
 
             <article className="flex flex-col gap-3 md:gap-8">
                 <div className="p-8 bg-white flex flex-col justify-center items-center gap-4 rounded-xl md:p-12 md:rounded-3xl md:gap-10">
-                    <Image
-                        src={accessIcon}
-                        text={"Accessibility"}
-                        bgColor={"#F6E7FF"}
-                    />
+                    <Image page={"/result"} subject={"Accessibility"} />
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <output className="font-medium text-[88px] md:text-display">
                             8
@@ -26,7 +23,9 @@ function Result() {
                         </p>
                     </div>
                 </div>
-                <Button>Play Again</Button>
+                <Link to="/">
+                    <Button>Play Again</Button>
+                </Link>
             </article>
         </section>
     );
