@@ -1,9 +1,28 @@
+import { useState } from "react";
 import Button from "../../components/Button.jsx";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import ProgressBar from "../../components/ProgressBar.jsx";
 import AnswerList from "../../components/AnswerList.jsx";
+import quizData from "../../assets/data.json";
+
+export async function quizLoader({ params }) {
+    const subjectName = params.subject;
+
+    const subjectQuestions = quizData.quizzes.filter(
+        quiz => quiz.title.toLowerCase() === subjectName.toLowerCase()
+    );
+
+    return subjectQuestions;
+}
 
 function Question() {
+    const [questionIndex, setQuestionIndex] = useState(0);
+    const [subjectQuestions] = useLoaderData();
+
+    const currentQuestionObj = subjectQuestions.questions[questionIndex];
+    const optionsLetter = ["A", "B", "C", "D"];
+
+    const { subject } = useParams();
     return (
         <section className="pt-8 px-6 grid gap-10 md:w-[640px] md:gap-16">
             <fieldset className="contents">
@@ -13,9 +32,7 @@ function Question() {
                             Question 6 of 10
                         </span>
                         <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2]">
-                            Which of these color contrast ratios define the
-                            minimum WCAG 2.1 Level AA requirement for normal
-                            text?
+                            {currentQuestionObj.question}
                         </h3>
                     </legend>
                     <ProgressBar />
@@ -23,13 +40,16 @@ function Question() {
 
                 <div className="flex flex-col gap-3 md:gap-8">
                     <ul className="flex flex-col gap-3 md:gap-6">
-                        <AnswerList answer={"4.5 : 1"} letter={"A"} />
-                        <AnswerList answer={"3 : 1"} letter={"B"} />
-                        <AnswerList answer={"2.5 : 1"} letter={"C"} />
-                        <AnswerList answer={"5 : 1"} letter={"D"} />
+                        {currentQuestionObj.options.map((option, index) => (
+                            <AnswerList
+                                answer={option}
+                                letter={optionsLetter[index]}
+                                key={index}
+                            />
+                        ))}
                     </ul>
 
-                    <Link to="/result">
+                    <Link to={`/result/${subject}`}>
                         <Button>Submit Answer</Button>
                     </Link>
                 </div>

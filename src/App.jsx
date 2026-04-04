@@ -1,8 +1,8 @@
-
-import StartMenu from "./pages/StartMenu/StartMenu.jsx"
-import Question from "./pages/QuizPage/Question.jsx";
+import StartMenu from "./pages/StartMenu/StartMenu.jsx";
+import Question, { quizLoader } from "./pages/QuizPage/Question.jsx";
 import Result from "./pages/ResultPage/Result.jsx";
 import RootLayout from "./layout/RootLayout.jsx";
+
 import {
     createBrowserRouter,
     Route,
@@ -15,8 +15,12 @@ function App() {
         createRoutesFromElements(
             <Route path="/" element={<RootLayout />}>
                 <Route index element={<StartMenu />} />
-                <Route path="questions" element={<Question />} />
-                <Route path="result" element={<Result />} />
+                <Route
+                    path="quiz/:subject"
+                    element={<Question />}
+                    loader={quizLoader}
+                />
+                <Route path="result/:subject" element={<Result />} />
             </Route>
         )
     );

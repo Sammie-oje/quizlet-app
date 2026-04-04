@@ -11,8 +11,8 @@ function SubjectImage({ subject, page }) {
         Accessibility: { url: accessIcon, bgColor: "#F6E7FF" }
     };
 
-    const imageURL = imageMap[subject].url;
-    const bgColor = imageMap[subject].bgColor;
+    const imageURL = imageMap[subject]?.url;
+    const bgColor = imageMap[subject]?.bgColor;
     const isHomePage = page === "/";
 
     return (
