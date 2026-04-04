@@ -23,13 +23,18 @@ function Question() {
     const optionsLetter = ["A", "B", "C", "D"];
 
     const { subject } = useParams();
+
+    function handleQuestion() {
+        setQuestionIndex(questionIndex + 1);
+    }
+    const isLastQuestion = questionIndex >= 9;
     return (
         <section className="pt-8 px-6 grid gap-10 md:w-[640px] md:gap-16">
             <fieldset className="contents">
                 <div className="flex flex-col gap-6 md:gap-10">
                     <legend className="flex flex-col gap-3 md:gap-[27px]">
                         <span className="text-sm/[1.5] italic text-slate-gray md:text-xl/[1.5]">
-                            Question 6 of 10
+                            Question {questionIndex + 1} of 10
                         </span>
                         <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2]">
                             {currentQuestionObj.question}
@@ -49,9 +54,13 @@ function Question() {
                         ))}
                     </ul>
 
-                    <Link to={`/result/${subject}`}>
-                        <Button>Submit Answer</Button>
-                    </Link>
+                    {isLastQuestion ? (
+                        <Link to={`/result/${subject}`}>
+                            <Button>Submit Answer</Button>
+                        </Link>
+                    ) : (
+                        <Button onClick={handleQuestion}>Submit Answer</Button>
+                    )}
                 </div>
             </fieldset>
         </section>
