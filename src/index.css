@@ -36,4 +36,9 @@
 
     --text-body-small: 1.25rem;
     --text-body-small--line-height: 150%;
+
+    --text-body-medium: 1.5rem;
+    --text-body-medium--line-height: 150%;
+    /*Breakpoint*/
+    --breakpoint-xxl: 90rem;
 }

@@ -33,7 +33,7 @@ function SubjectList() {
 
 function Subject({ children }) {
     return (
-        <li className="p-3 flex gap-4 items-center bg-white rounded-xl shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] md:rounded-3xl md:h-20 md:gap-8">
+        <li className="p-3 flex gap-4 items-center bg-white rounded-xl shadow-[0_4px_12px_0_rgba(0,0,0,0.15)] md:rounded-3xl md:h-20 md:gap-8 xxl:p-5 ">
             {children}
         </li>
     );

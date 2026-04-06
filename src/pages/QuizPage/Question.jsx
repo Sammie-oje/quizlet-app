@@ -29,15 +29,15 @@ function Question() {
     }
     const isLastQuestion = questionIndex >= 9;
     return (
-        <section className="pt-8 px-6 grid gap-10 md:w-[640px] md:gap-16">
+        <section className="pt-8 px-6 grid gap-10 w-full md:gap-16 xxl:grid-cols-2 xxl:gap-[131px]">
             <fieldset className="contents">
-                <div className="flex flex-col gap-6 md:gap-10">
+                <div className="flex flex-col gap-6 md:gap-10 xxl:gap-[123px]">
                     <legend className="flex flex-col gap-3 md:gap-[27px]">
-                        <span className="text-sm/[1.5] italic text-slate-gray md:text-xl/[1.5]">
+                        <span className="text-sm/[1.5] italic text-slate-gray md:text-xl/[1.5] xxl:text-body-small">
                             Question {questionIndex + 1} of 10
                         </span>
-                        <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2]">
-                            {currentQuestionObj.question}
+                        <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2] xxl:text-heading-medium">
+                           {currentQuestionObj.question}
                         </h3>
                     </legend>
                     <ProgressBar />

@@ -3,14 +3,16 @@ import cssIcon from "../assets/images/icon-css.svg";
 import jsIcon from "../assets/images/icon-js.svg";
 import accessIcon from "../assets/images/icon-accessibility.svg";
 
-function SubjectImage({ subject, page }) {
-    const imageMap = {
+const imageMap = {
         HTML: { url: htmlIcon, bgColor: "#FFF1E9" },
         CSS: { url: cssIcon, bgColor: "#E0FDEF" },
         Javascript: { url: jsIcon, bgColor: "#EBF0FF" },
         Accessibility: { url: accessIcon, bgColor: "#F6E7FF" }
     };
+    
 
+function SubjectImage({ subject, page }) {
+    
     const imageURL = imageMap[subject]?.url;
     const bgColor = imageMap[subject]?.bgColor;
     const isHomePage = page === "/";

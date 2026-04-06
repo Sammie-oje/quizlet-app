@@ -1,12 +1,12 @@
 import darkMoonIcon from "../assets/images/icon-moon-dark.svg";
 import darkSunIcon from "../assets/images/icon-sun-dark.svg";
 
-function Header({ children}) {
+function Header({ children }) {
     return (
-        <header className="py-4 px-6 flex items-center justify-between md:w-[640px]">
+        <header className="py-4 px-6 flex items-center justify-between w-full xxl:my-21">
             {children}
 
-            <div className="flex gap-2 items-center justify-between md:gap-4">
+            <div className="flex gap-2 items-center justify-between md:gap-4 ">
                 <img
                     src={darkSunIcon}
                     alt="icon-sun-light"
