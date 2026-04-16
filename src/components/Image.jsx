@@ -4,15 +4,13 @@ import jsIcon from "../assets/images/icon-js.svg";
 import accessIcon from "../assets/images/icon-accessibility.svg";
 
 const imageMap = {
-        HTML: { url: htmlIcon, bgColor: "#FFF1E9" },
-        CSS: { url: cssIcon, bgColor: "#E0FDEF" },
-        Javascript: { url: jsIcon, bgColor: "#EBF0FF" },
-        Accessibility: { url: accessIcon, bgColor: "#F6E7FF" }
-    };
-    
+    HTML: { url: htmlIcon, bgColor: "#FFF1E9" },
+    CSS: { url: cssIcon, bgColor: "#E0FDEF" },
+    Javascript: { url: jsIcon, bgColor: "#EBF0FF" },
+    Accessibility: { url: accessIcon, bgColor: "#F6E7FF" }
+};
 
 function SubjectImage({ subject, page }) {
-    
     const imageURL = imageMap[subject]?.url;
     const bgColor = imageMap[subject]?.bgColor;
     const isHomePage = page === "/";
@@ -31,7 +29,7 @@ function SubjectImage({ subject, page }) {
                     alt={`${subject}-icon`}
                 />
             </div>
-            <span className="text-lg font-medium md:text-heading-small">
+            <span className="text-lg font-medium md:text-heading-small dark:text-white">
                 {subject}
             </span>
         </div>

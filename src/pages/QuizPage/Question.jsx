@@ -15,12 +15,13 @@ export async function quizLoader({ params }) {
     return subjectQuestions;
 }
 
+const optionsLetter = ["A", "B", "C", "D"];
+
 function Question() {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [subjectQuestions] = useLoaderData();
 
     const currentQuestionObj = subjectQuestions.questions[questionIndex];
-    const optionsLetter = ["A", "B", "C", "D"];
 
     const { subject } = useParams();
 
@@ -33,11 +34,11 @@ function Question() {
             <fieldset className="contents">
                 <div className="flex flex-col gap-6 md:gap-10 xxl:gap-[123px]">
                     <legend className="flex flex-col gap-3 md:gap-[27px]">
-                        <span className="text-sm/[1.5] italic text-slate-gray md:text-xl/[1.5] xxl:text-body-small">
+                        <span className="text-sm/[1.5] italic text-slate-gray md:text-xl/[1.5] xxl:text-body-small dark:text-light-blue">
                             Question {questionIndex + 1} of 10
                         </span>
-                        <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2] xxl:text-heading-medium">
-                           {currentQuestionObj.question}
+                        <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2] xxl:text-heading-medium dark:text-white">
+                            {currentQuestionObj.question}
                         </h3>
                     </legend>
                     <ProgressBar />
