@@ -12,7 +12,7 @@
 .background {
     @apply bg-ghost-white bg-[url('/src/assets/images/pattern-background-mobile-light.svg')] bg-no-repeat bg-cover md:bg-[url('/src/assets/images/pattern-background-tablet-light.svg')] md:flex md:items-center md:justify-center xxl:bg-[url('/src/assets/images/pattern-background-desktop-light.svg')];
 
-    @apply dark:bg-dark-slate dark:bg-[url('/src/assets/images/pattern-background-mobile-dark.svg')] md:bg-[url('/src/assets/images/pattern-background-tablet-dark.svg')] xxl:bg-[url('/src/assets/images/pattern-background-desktop-dark.svg')];
+    @apply dark:bg-dark-slate dark:bg-[url('/src/assets/images/pattern-background-mobile-dark.svg')] dark:md:bg-[url('/src/assets/images/pattern-background-tablet-dark.svg')] dark:xxl:bg-[url('/src/assets/images/pattern-background-desktop-dark.svg')];
 }
 
 @theme {
