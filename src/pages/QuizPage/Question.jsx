@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "../../components/Button.jsx";
+import Alert from "../../components/Alert.jsx";
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import ProgressBar from "../../components/ProgressBar.jsx";
 import AnswerList from "../../components/AnswerList.jsx";
@@ -62,6 +63,8 @@ function Question() {
                     ) : (
                         <Button onClick={handleQuestion}>Submit Answer</Button>
                     )}
+
+                    <Alert />
                 </div>
             </fieldset>
         </section>

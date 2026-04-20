@@ -7,10 +7,10 @@ import darkModeSunIcon from "../assets/images/icon-sun-light.svg";
 
 function Header({ children }) {
     //The theme of the header icons should match the user's OS theme preference and/or the current app theme
-    const [isDarkMode, setisDarkMode] = useState(true);
-    //The user should be able to tiggle state manually
+    const [isDarkMode, setIsDarkMode] = useState(true);
+    //The user should be able to toggle state manually
     const onToggleTheme = () => {
-        setisDarkMode(!isDarkMode);
+        setIsDarkMode(!isDarkMode);
         document.documentElement.classList.toggle("dark");
     };
     /*
@@ -19,14 +19,14 @@ function Header({ children }) {
     useEffect(() => {
         const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
         const applyTheme = e => {
-            setisDarkMode(e.matches);
+            setIsDarkMode(e.matches);
             document.documentElement.classList.toggle("dark", e.matches);
         };
 
         applyTheme(mediaQuery);
         mediaQuery.addEventListener("change", applyTheme);
 
-        return () => mediaQuery.removeEventListener("change", applyTheme); 
+        return () => mediaQuery.removeEventListener("change", applyTheme);
     }, []);
 
     return (
