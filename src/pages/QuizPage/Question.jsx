@@ -33,7 +33,10 @@ function Question() {
     const hasSubmitted = isOptionCorrect !== null;
     const correctOption = currentQuestionObj.answer;
 
-    function handleQuestion() {
+    //When users go to the next question, they should start blank i.e correct and incorrect option styles should be removed
+    function handleNextQuestion() {
+        setIsOptionCorrect(null);
+        setSelectedId(null);
         setQuestionIndex(questionIndex + 1);
     }
 
@@ -89,14 +92,17 @@ function Question() {
                         ))}
                     </ul>
 
-                    {/*isLastQuestion ? (
+                    {isLastQuestion ? (
                         <Link to={`/result/${subject}`}>
                             <Button>Submit Answer</Button>
                         </Link>
+                    ) : hasSubmitted ? (
+                        <Button onClick={handleNextQuestion}>
+                            Next Question
+                        </Button>
                     ) : (
-                        <Button onClick={handleQuestion}>Submit Answer</Button>
-                    )*/}
-                    <Button onClick={handleSubmit}>Submit Answer</Button>
+                        <Button onClick={handleSubmit}>Submit Answer</Button>
+                    )}
 
                     {showAlert && <Alert />}
                 </div>
