@@ -5,6 +5,7 @@ import { Link, useLoaderData, useParams } from "react-router-dom";
 import ProgressBar from "../../components/ProgressBar.jsx";
 import AnswerList from "../../components/AnswerList.jsx";
 import quizData from "../../assets/data.json";
+import { evaluateSelectedOption } from "../../utils/evaluateSelectedOption.js";
 
 export async function quizLoader({ params }) {
     const subjectName = params.subject;
@@ -20,16 +21,34 @@ const optionsLetter = ["A", "B", "C", "D"];
 
 function Question() {
     const [questionIndex, setQuestionIndex] = useState(0);
+    const [selectedId, setSelectedId] = useState(null);
+    const [isOptionCorrect, setIsOptionCorrect] = useState(null);
+
     const [subjectQuestions] = useLoaderData();
-
     const currentQuestionObj = subjectQuestions.questions[questionIndex];
-
     const { subject } = useParams();
+
+    const isLastQuestion = questionIndex >= 9;
+    const hasSubmitted = isOptionCorrect !== null;
+    const correctOption = currentQuestionObj.answer;
 
     function handleQuestion() {
         setQuestionIndex(questionIndex + 1);
     }
-    const isLastQuestion = questionIndex >= 9;
+
+    function handleSelectedOption(e) {
+        if (hasSubmitted) return; //Users should not be able to select options after submitting
+        const clickedOptionId = e.target.closest("li").id;
+        if (clickedOptionId) {
+            setSelectedId(Number(clickedOptionId));
+        }
+    }
+    function handleCorrectOption() {
+        setIsOptionCorrect(
+            evaluateSelectedOption(currentQuestionObj, selectedId)
+        );
+    }
+
     return (
         <section className="pt-8 px-6 grid gap-10 w-full md:gap-16 xxl:grid-cols-2 xxl:gap-[131px]">
             <fieldset className="contents">
@@ -46,25 +65,33 @@ function Question() {
                 </div>
 
                 <div className="flex flex-col gap-3 md:gap-8">
-                    <ul className="flex flex-col gap-3 md:gap-6">
+                    <ul
+                        className="flex flex-col gap-3 md:gap-6"
+                        onClick={e => handleSelectedOption(e)}
+                    >
                         {currentQuestionObj.options.map((option, index) => (
                             <AnswerList
                                 answer={option}
                                 letter={optionsLetter[index]}
                                 key={index}
+                                id={index}
+                                selectedId={selectedId}
+                                correctOption={correctOption}
+                               hasSubmitted={hasSubmitted} isOptionCorrect={isOptionCorrect}
                             />
                         ))}
                     </ul>
 
-                    {isLastQuestion ? (
+                    {/*isLastQuestion ? (
                         <Link to={`/result/${subject}`}>
                             <Button>Submit Answer</Button>
                         </Link>
                     ) : (
                         <Button onClick={handleQuestion}>Submit Answer</Button>
-                    )}
+                    )*/}
+                    <Button onClick={handleCorrectOption}>Submit Answer</Button>
 
-                    <Alert />
+                    {hasSubmitted && selectedId === null && <Alert />}
                 </div>
             </fieldset>
         </section>
