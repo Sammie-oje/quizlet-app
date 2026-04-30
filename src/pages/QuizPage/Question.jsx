@@ -23,6 +23,7 @@ function Question() {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [selectedId, setSelectedId] = useState(null);
     const [isOptionCorrect, setIsOptionCorrect] = useState(null);
+    const [showAlert, setShowAlert] = useState(false);
 
     const [subjectQuestions] = useLoaderData();
     const currentQuestionObj = subjectQuestions.questions[questionIndex];
@@ -43,7 +44,12 @@ function Question() {
             setSelectedId(Number(clickedOptionId));
         }
     }
-    function handleCorrectOption() {
+    function handleSubmit() {
+        if (selectedId === null) {
+            setShowAlert(true);
+            return;
+        }
+        setShowAlert(false);
         setIsOptionCorrect(
             evaluateSelectedOption(currentQuestionObj, selectedId)
         );
@@ -77,7 +83,8 @@ function Question() {
                                 id={index}
                                 selectedId={selectedId}
                                 correctOption={correctOption}
-                               hasSubmitted={hasSubmitted} isOptionCorrect={isOptionCorrect}
+                                hasSubmitted={hasSubmitted}
+                                isOptionCorrect={isOptionCorrect}
                             />
                         ))}
                     </ul>
@@ -89,9 +96,9 @@ function Question() {
                     ) : (
                         <Button onClick={handleQuestion}>Submit Answer</Button>
                     )*/}
-                    <Button onClick={handleCorrectOption}>Submit Answer</Button>
+                    <Button onClick={handleSubmit}>Submit Answer</Button>
 
-                    {hasSubmitted && selectedId === null && <Alert />}
+                    {showAlert && <Alert />}
                 </div>
             </fieldset>
         </section>
