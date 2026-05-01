@@ -70,7 +70,7 @@ function Question() {
                             {currentQuestionObj.question}
                         </h3>
                     </legend>
-                    <ProgressBar />
+                    <ProgressBar percent={(questionIndex + 1)*10}/>
                 </div>
 
                 <div className="flex flex-col gap-3 md:gap-8">
@@ -94,7 +94,7 @@ function Question() {
 
                     {isLastQuestion ? (
                         <Link to={`/result/${subject}`}>
-                            <Button>Submit Answer</Button>
+                            <Button>Submit Quiz</Button>
                         </Link>
                     ) : hasSubmitted ? (
                         <Button onClick={handleNextQuestion}>
