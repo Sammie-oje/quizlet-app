@@ -92,7 +92,7 @@ function Question() {
                         ))}
                     </ul>
 
-                    {isLastQuestion ? (
+                    {hasSubmitted && isLastQuestion ? (
                         <Link to={`/result/${subject}`}>
                             <Button>Submit Quiz</Button>
                         </Link>
