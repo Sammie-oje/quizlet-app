@@ -1,10 +1,12 @@
 import Image from "../../components/Image.jsx";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useOutletContext } from "react-router-dom";
 import Button from "../../components/Button.jsx";
 import accessIcon from "../../assets/images/icon-accessibility.svg";
 
 function Result() {
     const { subject } = useParams();
+    const [quizResult] = useOutletContext();
+
 
     return (
         <section className="px-6 pt-8 w-full flex flex-col gap-10 md:gap-16 xxl:flex-row xxl:gap-[11.5rem] xxl:px-0">
@@ -18,7 +20,7 @@ function Result() {
                     <Image subject={subject} page={"/result"} />
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <output className="font-medium text-[88px] md:text-display dark:text-white">
-                            8
+                            {quizResult}
                         </output>
                         <p className="font-regular text-lg text-slate-gray md:text-body-small xxl:text-body-medium dark:text-light-blue">
                             out of 10

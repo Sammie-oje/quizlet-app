@@ -1,7 +1,14 @@
 import { useState } from "react";
 import Button from "../../components/Button.jsx";
 import Alert from "../../components/Alert.jsx";
-import { Link, useLoaderData, useParams } from "react-router-dom";
+
+import {
+    Link,
+    useLoaderData,
+    useParams,
+    useOutletContext
+} from "react-router-dom";
+
 import ProgressBar from "../../components/ProgressBar.jsx";
 import AnswerList from "../../components/AnswerList.jsx";
 import quizData from "../../assets/data.json";
@@ -23,7 +30,9 @@ function Question() {
     const [questionIndex, setQuestionIndex] = useState(0);
     const [selectedId, setSelectedId] = useState(null);
     const [isOptionCorrect, setIsOptionCorrect] = useState(null);
+
     const [showAlert, setShowAlert] = useState(false);
+    const [quizResult, setQuizResult] = useOutletContext();
 
     const [subjectQuestions] = useLoaderData();
     const currentQuestionObj = subjectQuestions.questions[questionIndex];
@@ -38,8 +47,13 @@ function Question() {
         setIsOptionCorrect(null);
         setSelectedId(null);
         setQuestionIndex(questionIndex + 1);
+        countPoints();
     }
-
+    function countPoints() {
+        if (correctOption && isOptionCorrect) {
+            setQuizResult(prev => prev + 1);
+        }
+    }
     function handleSelectedOption(e) {
         if (hasSubmitted) return; //Users should not be able to select options after submitting
         const clickedOptionId = e.target.closest("li").id;
@@ -70,7 +84,7 @@ function Question() {
                             {currentQuestionObj.question}
                         </h3>
                     </legend>
-                    <ProgressBar percent={(questionIndex + 1)*10}/>
+                    <ProgressBar percent={(questionIndex + 1) * 10} />
                 </div>
 
                 <div className="flex flex-col gap-3 md:gap-8">
@@ -94,7 +108,7 @@ function Question() {
 
                     {hasSubmitted && isLastQuestion ? (
                         <Link to={`/result/${subject}`}>
-                            <Button>Submit Quiz</Button>
+                            <Button onClick={countPoints}>Submit Quiz</Button>
                         </Link>
                     ) : hasSubmitted ? (
                         <Button onClick={handleNextQuestion}>
