@@ -14,7 +14,7 @@ function Header({ children }) {
         document.documentElement.classList.toggle("dark");
     };
     /*
-    The app should be responsive to the OS theme i.e when the OS theme changes the app should also change with it
+    The app should be responsive to the OS theme i.e when the OS theme changes, the app's theme should also change with it
     */
     useEffect(() => {
         const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
