@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Image from "../../components/Image.jsx";
+import Image from "../../components/common/Image.jsx";
 
 function SubjectList() {
     return (

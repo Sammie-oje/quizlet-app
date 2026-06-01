@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import * as motion from "motion/react-client";
-import lightModeMoonIcon from "../assets/images/icon-moon-dark.svg";
-import lightModeSunIcon from "../assets/images/icon-sun-dark.svg";
-import darkModeMoonIcon from "../assets/images/icon-moon-light.svg";
-import darkModeSunIcon from "../assets/images/icon-sun-light.svg";
+import lightModeMoonIcon from "../../assets/images/icon-moon-dark.svg";
+import lightModeSunIcon from "../../assets/images/icon-sun-dark.svg";
+import darkModeMoonIcon from "../../assets/images/icon-moon-light.svg";
+import darkModeSunIcon from "../../assets/images/icon-sun-light.svg";
 
 function Header({ children }) {
     //The theme of the header icons should match the user's OS theme preference and/or the current app theme

@@ -1,4 +1,4 @@
-import alertIcon from "../assets/images/icon-error.svg";
+import alertIcon from "../../assets/images/icon-error.svg";
 
 function Alert() {
     return (

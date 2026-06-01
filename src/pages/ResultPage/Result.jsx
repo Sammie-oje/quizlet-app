@@ -1,12 +1,15 @@
-import Image from "../../components/Image.jsx";
-import { Link, useParams, useOutletContext } from "react-router-dom";
-import Button from "../../components/Button.jsx";
-import accessIcon from "../../assets/images/icon-accessibility.svg";
+import Image from "../../components/common/Image.jsx";
+import { useNavigate, useParams, useOutletContext } from "react-router-dom";
+import Button from "../../components/common/Button.jsx";
 
 function Result() {
     const { subject } = useParams();
     const [quizResult] = useOutletContext();
+    const navigate = useNavigate();
 
+    const handlePlayAgain = () => {
+        navigate("/");
+    };
 
     return (
         <section className="px-6 pt-8 w-full flex flex-col gap-10 md:gap-16 xxl:flex-row xxl:gap-[11.5rem] xxl:px-0">
@@ -27,9 +30,9 @@ function Result() {
                         </p>
                     </div>
                 </div>
-                <Link to="/">
+                <a onClick={handlePlayAgain}>
                     <Button>Play Again</Button>
-                </Link>
+                </a>
             </article>
         </section>
     );

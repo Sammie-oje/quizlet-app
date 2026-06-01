@@ -1,5 +1,5 @@
-import inCorrectIcon from "../assets/images/icon-incorrect.svg";
-import correctIcon from "../assets/images/icon-correct.svg";
+import inCorrectIcon from "../../assets/images/icon-incorrect.svg";
+import correctIcon from "../../assets/images/icon-correct.svg";
 
 function AnswerList({
     answer,
@@ -53,7 +53,8 @@ function AnswerList({
                     {answer}
                 </span>
 
-                {(hasSubmitted&&isCorrectOption || revealedCorrectOption) && (
+                {((hasSubmitted && isCorrectOption) ||
+                    revealedCorrectOption) && (
                     <img
                         src={correctIcon}
                         alt="option-correct"

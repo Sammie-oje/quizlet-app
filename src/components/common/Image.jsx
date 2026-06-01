@@ -1,7 +1,7 @@
-import htmlIcon from "../assets/images/icon-html.svg";
-import cssIcon from "../assets/images/icon-css.svg";
-import jsIcon from "../assets/images/icon-js.svg";
-import accessIcon from "../assets/images/icon-accessibility.svg";
+import htmlIcon from "../../assets/images/icon-html.svg";
+import cssIcon from "../../assets/images/icon-css.svg";
+import jsIcon from "../../assets/images/icon-js.svg";
+import accessIcon from "../../assets/images/icon-accessibility.svg";
 
 const imageMap = {
     HTML: { url: htmlIcon, bgColor: "#FFF1E9" },

@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Button from "../../components/Button.jsx";
-import Alert from "../../components/Alert.jsx";
-
+import Button from "../../components/common/Button.jsx";
+import Alert from "../../components/quiz/Alert.jsx";
 import {
     Link,
     useLoaderData,
@@ -9,8 +8,8 @@ import {
     useOutletContext
 } from "react-router-dom";
 
-import ProgressBar from "../../components/ProgressBar.jsx";
-import AnswerList from "../../components/AnswerList.jsx";
+import ProgressBar from "../../components/quiz/ProgressBar.jsx";
+import AnswerList from "../../components/quiz/AnswerList.jsx";
 import quizData from "../../assets/data.json";
 import { evaluateSelectedOption } from "../../utils/evaluateSelectedOption.js";
 
