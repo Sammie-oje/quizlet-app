@@ -1,13 +1,14 @@
 import SubjectList from "./SubjectList.jsx";
-import { useOutletContext } from "react-router-dom";
+import { QuizContext } from "../../contexts/QuizContext.jsx";
+import { useContext } from "react";
 import { useEffect } from "react";
 
 function StartMenu() {
     //To prevent flash of result being reset when state is reset in the Result page
-    const [quizResult, setQuizResult] = useOutletContext();
-    
+    const quiz = useContext(QuizContext);
+
     useEffect(() => {
-        setQuizResult(0);
+        quiz.setQuizResult(0);
     }, []);
 
     return (

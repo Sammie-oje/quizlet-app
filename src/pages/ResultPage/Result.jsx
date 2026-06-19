@@ -1,14 +1,17 @@
 import Image from "../../components/common/Image.jsx";
-import { useNavigate, useParams, useOutletContext } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { QuizContext } from "../../contexts/QuizContext.jsx";
+import { useContext } from "react";
 import Button from "../../components/common/Button.jsx";
 
 function Result() {
     const { subject } = useParams();
-    const [quizResult] = useOutletContext();
+    const quiz = useContext(QuizContext);
     const navigate = useNavigate();
 
     const handlePlayAgain = () => {
-        navigate("/");
+        sessionStorage.setItem("hasStarted", "false");
+        navigate("/", { replace: true });
     };
 
     return (
@@ -23,7 +26,7 @@ function Result() {
                     <Image subject={subject} page={"/result"} />
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <output className="font-medium text-[88px] md:text-display dark:text-white">
-                            {quizResult}
+                            {quiz.quizResult}
                         </output>
                         <p className="font-regular text-lg text-slate-gray md:text-body-small xxl:text-body-medium dark:text-light-blue">
                             out of 10

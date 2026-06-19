@@ -2,27 +2,31 @@ import { Link } from "react-router-dom";
 import Image from "../../components/common/Image.jsx";
 
 function SubjectList() {
+    const handleStart = () => {
+        sessionStorage.setItem("hasStarted", "true");
+    };
+
     return (
         <ul className="flex flex-col gap-3 md:gap-6">
-            <Link to="/quiz/HTML">
+            <Link to="/quiz/HTML" replace onClick={handleStart}>
                 <Subject>
                     <Image page={""} subject={"HTML"} />
                 </Subject>
             </Link>
 
-            <Link to="/quiz/CSS">
+            <Link to="/quiz/CSS" replace onClick={handleStart}>
                 <Subject>
                     <Image page={""} subject={"CSS"} />
                 </Subject>
             </Link>
 
-            <Link to="/quiz/Javascript">
+            <Link to="/quiz/Javascript" replace onClick={handleStart}>
                 <Subject>
                     <Image page={""} subject={"Javascript"} />
                 </Subject>
             </Link>
 
-            <Link to="/quiz/Accessibility">
+            <Link to="/quiz/Accessibility" replace onClick={handleStart}>
                 <Subject>
                     <Image page={""} subject={"Accessibility"} />
                 </Subject>

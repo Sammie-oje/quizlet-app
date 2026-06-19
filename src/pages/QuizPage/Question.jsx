@@ -1,15 +1,13 @@
 import { useState } from "react";
 import Button from "../../components/common/Button.jsx";
 import Alert from "../../components/quiz/Alert.jsx";
-import {
-    Link,
-    useLoaderData,
-    useParams,
-    useOutletContext
-} from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 
+import { QuizContext } from "../../contexts/QuizContext.jsx";
+import { useContext } from "react";
+import { ProtectedRoute } from "../../components/common/ProtectedRoute.jsx";
 import ProgressBar from "../../components/quiz/ProgressBar.jsx";
-import AnswerList from "../../components/quiz/AnswerList.jsx";
+import AnswerList from "./AnswerList.jsx";
 import quizData from "../../assets/data.json";
 import { evaluateSelectedOption } from "../../utils/evaluateSelectedOption.js";
 
@@ -31,7 +29,7 @@ function Question() {
     const [isOptionCorrect, setIsOptionCorrect] = useState(null);
 
     const [showAlert, setShowAlert] = useState(false);
-    const [quizResult, setQuizResult] = useOutletContext();
+    const quiz = useContext(QuizContext);
 
     const [subjectQuestions] = useLoaderData();
     const currentQuestionObj = subjectQuestions.questions[questionIndex];
@@ -50,7 +48,7 @@ function Question() {
     }
     function countPoints() {
         if (correctOption && isOptionCorrect) {
-            setQuizResult(prev => prev + 1);
+            quiz.setQuizResult(prev => prev + 1);
         }
     }
     function handleSelectedOption(e) {
@@ -72,55 +70,61 @@ function Question() {
     }
 
     return (
-        <section className="pt-8 px-6 grid gap-10 w-full md:gap-16 xxl:grid-cols-2 xxl:gap-[131px]">
-            <fieldset className="contents">
-                <div className="flex flex-col gap-6 md:gap-10 xxl:gap-[123px]">
-                    <legend className="flex flex-col gap-3 md:gap-[27px]">
-                        <span className="text-sm/[1.5] italic text-slate-gray md:text-xl/[1.5] xxl:text-body-small dark:text-light-blue">
-                            Question {questionIndex + 1} of 10
-                        </span>
-                        <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2] xxl:text-heading-medium dark:text-white">
-                            {currentQuestionObj.question}
-                        </h3>
-                    </legend>
-                    <ProgressBar percent={(questionIndex + 1) * 10} />
-                </div>
+        <ProtectedRoute>
+            <section className="pt-8 px-6 grid gap-10 w-full md:gap-16 xxl:grid-cols-2 xxl:gap-[131px]">
+                <fieldset className="contents">
+                    <div className="flex flex-col gap-6 md:gap-10 xxl:gap-[123px]">
+                        <legend className="flex flex-col gap-3 md:gap-[27px]">
+                            <span className="text-sm/[1.5] italic text-slate-gray md:text-xl/[1.5] xxl:text-body-small dark:text-light-blue">
+                                Question {questionIndex + 1} of 10
+                            </span>
+                            <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2] xxl:text-heading-medium dark:text-white">
+                                {currentQuestionObj.question}
+                            </h3>
+                        </legend>
+                        <ProgressBar percent={(questionIndex + 1) * 10} />
+                    </div>
 
-                <div className="flex flex-col gap-3 md:gap-8">
-                    <ul
-                        className="flex flex-col gap-3 md:gap-6"
-                        onClick={e => handleSelectedOption(e)}
-                    >
-                        {currentQuestionObj.options.map((option, index) => (
-                            <AnswerList
-                                answer={option}
-                                letter={optionsLetter[index]}
-                                key={index}
-                                id={index}
-                                selectedId={selectedId}
-                                correctOption={correctOption}
-                                hasSubmitted={hasSubmitted}
-                                isOptionCorrect={isOptionCorrect}
-                            />
-                        ))}
-                    </ul>
+                    <div className="flex flex-col gap-3 md:gap-8">
+                        <ul
+                            className="flex flex-col gap-3 md:gap-6"
+                            onClick={e => handleSelectedOption(e)}
+                        >
+                            {currentQuestionObj.options.map((option, index) => (
+                                <AnswerList
+                                    answer={option}
+                                    letter={optionsLetter[index]}
+                                    key={index}
+                                    id={index}
+                                    selectedId={selectedId}
+                                    correctOption={correctOption}
+                                    hasSubmitted={hasSubmitted}
+                                    isOptionCorrect={isOptionCorrect}
+                                />
+                            ))}
+                        </ul>
 
-                    {hasSubmitted && isLastQuestion ? (
-                        <Link to={`/result/${subject}`}>
-                            <Button onClick={countPoints}>Submit Quiz</Button>
-                        </Link>
-                    ) : hasSubmitted ? (
-                        <Button onClick={handleNextQuestion}>
-                            Next Question
-                        </Button>
-                    ) : (
-                        <Button onClick={handleSubmit}>Submit Answer</Button>
-                    )}
+                        {hasSubmitted && isLastQuestion ? (
+                            <Link to={`/result/${subject}`}>
+                                <Button onClick={countPoints}>
+                                    Submit Quiz
+                                </Button>
+                            </Link>
+                        ) : hasSubmitted ? (
+                            <Button onClick={handleNextQuestion}>
+                                Next Question
+                            </Button>
+                        ) : (
+                            <Button onClick={handleSubmit}>
+                                Submit Answer
+                            </Button>
+                        )}
 
-                    {showAlert && <Alert />}
-                </div>
-            </fieldset>
-        </section>
+                        {showAlert && <Alert />}
+                    </div>
+                </fieldset>
+            </section>
+        </ProtectedRoute>
     );
 }
 

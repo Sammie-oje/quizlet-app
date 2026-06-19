@@ -1,8 +1,9 @@
 import Header from "../components/common/Header.jsx";
 import Image from "../components/common/Image.jsx";
 import { getSubjectFromUrl } from "../utils/getSubjectFromUrl.js";
-import { Outlet, useLocation } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import { useState } from "react";
+import { QuizContext } from "../contexts/QuizContext.jsx";
 
 function RootLayout() {
     const { pathname } = useLocation();
@@ -10,12 +11,12 @@ function RootLayout() {
     const [quizResult, setQuizResult] = useState(0);
 
     return (
-        <>
+        <QuizContext value={{quizResult, setQuizResult}}>
             <Header>
                 <Image subject={subject} page={pathname} />
             </Header>
-            <Outlet context={[quizResult, setQuizResult]}/>
-        </>
+            <Outlet  />
+        </QuizContext>
     );
 }
 

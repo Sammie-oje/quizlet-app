@@ -10,8 +10,7 @@ import {
     RouterProvider
 } from "react-router-dom";
 
-function App() {
-    const router = createBrowserRouter(
+const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<RootLayout />}>
                 <Route index element={<StartMenu />} />
@@ -24,7 +23,10 @@ function App() {
             </Route>
         )
     );
+    
 
+function App() {
+    
     return <RouterProvider router={router} />;
 }
 
