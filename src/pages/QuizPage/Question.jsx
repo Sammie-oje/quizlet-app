@@ -1,13 +1,11 @@
-import { useState } from "react";
 import Button from "../../components/common/Button.jsx";
 import Alert from "../../components/quiz/Alert.jsx";
-import { Link, useLoaderData, useParams } from "react-router-dom";
-
-import { QuizContext } from "../../contexts/QuizContext.jsx";
-import { useContext } from "react";
-import { ProtectedRoute } from "../../components/common/ProtectedRoute.jsx";
 import ProgressBar from "../../components/quiz/ProgressBar.jsx";
 import AnswerList from "./AnswerList.jsx";
+
+import { Link, useLoaderData, useParams } from "react-router-dom";
+import { useQuizDispatch, useQuiz } from "../../contexts/QuizContext.jsx";
+import { ProtectedRoute } from "../../components/common/ProtectedRoute.jsx";
 import quizData from "../../assets/data.json";
 import { evaluateSelectedOption } from "../../utils/evaluateSelectedOption.js";
 
@@ -21,15 +19,16 @@ export async function quizLoader({ params }) {
     return subjectQuestions;
 }
 
-const optionsLetter = ["A", "B", "C", "D"];
-
 function Question() {
-    const [questionIndex, setQuestionIndex] = useState(0);
-    const [selectedId, setSelectedId] = useState(null);
-    const [isOptionCorrect, setIsOptionCorrect] = useState(null);
-
-    const [showAlert, setShowAlert] = useState(false);
-    const quiz = useContext(QuizContext);
+    const dispatch = useQuizDispatch();
+    const quizState = useQuiz();
+    const {
+        quizResult,
+        questionIndex,
+        selectedId,
+        isOptionCorrect,
+        showAlert
+    } = quizState;
 
     const [subjectQuestions] = useLoaderData();
     const currentQuestionObj = subjectQuestions.questions[questionIndex];
@@ -39,34 +38,33 @@ function Question() {
     const hasSubmitted = isOptionCorrect !== null;
     const correctOption = currentQuestionObj.answer;
 
-    //When users go to the next question, they should start blank i.e correct and incorrect option styles should be removed
     function handleNextQuestion() {
-        setIsOptionCorrect(null);
-        setSelectedId(null);
-        setQuestionIndex(questionIndex + 1);
-        countPoints();
+        dispatch({ type: "NEXT_QUESTION" });
     }
-    function countPoints() {
-        if (correctOption && isOptionCorrect) {
-            quiz.setQuizResult(prev => prev + 1);
-        }
-    }
+
     function handleSelectedOption(e) {
-        if (hasSubmitted) return; //Users should not be able to select options after submitting
-        const clickedOptionId = e.target.closest("li").id;
+        const clickedOptionId = e.target.closest("li")?.id;
         if (clickedOptionId) {
-            setSelectedId(Number(clickedOptionId));
+            dispatch({
+                type: "SELECT_OPTION",
+                payload: Number(clickedOptionId)
+            });
         }
     }
     function handleSubmit() {
         if (selectedId === null) {
-            setShowAlert(true);
+            dispatch({ type: "SUBMIT_ANSWER" });
             return;
         }
-        setShowAlert(false);
-        setIsOptionCorrect(
-            evaluateSelectedOption(currentQuestionObj, selectedId)
+        const isCorrect = evaluateSelectedOption(
+            currentQuestionObj,
+            selectedId
         );
+
+        dispatch({
+            type: "SUBMIT_ANSWER",
+            payload: isCorrect
+        });
     }
 
     return (
@@ -93,7 +91,6 @@ function Question() {
                             {currentQuestionObj.options.map((option, index) => (
                                 <AnswerList
                                     answer={option}
-                                    letter={optionsLetter[index]}
                                     key={index}
                                     id={index}
                                     selectedId={selectedId}
@@ -106,7 +103,7 @@ function Question() {
 
                         {hasSubmitted && isLastQuestion ? (
                             <Link to={`/result/${subject}`}>
-                                <Button onClick={countPoints}>
+                                <Button>
                                     Submit Quiz
                                 </Button>
                             </Link>

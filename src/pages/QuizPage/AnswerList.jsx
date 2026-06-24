@@ -3,7 +3,6 @@ import correctIcon from "../../assets/images/icon-correct.svg";
 
 function AnswerList({
     answer,
-    letter,
     id,
     selectedId,
     isOptionCorrect,
@@ -46,7 +45,7 @@ function AnswerList({
                     className={`size-10 rounded-md shrink-0 flex items-center justify-center bg-ghost-white font-medium text-xl text-slate-gray group-hover:bg-[#F6E7FF] group-hover:text-vivid-violet md:text-heading-small md:rounded-xl md:size-14 xxl:rounded-lg
                     ${setLetterStyles()}`}
                 >
-                    {letter}
+                    {String.fromCharCode(65 + id)}
                 </div>
 
                 <span className="grow font-medium text-lg text-dark-slate md:text-heading-small dark:text-white">

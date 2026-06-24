@@ -1,14 +1,13 @@
 import SubjectList from "./SubjectList.jsx";
-import { QuizContext } from "../../contexts/QuizContext.jsx";
-import { useContext } from "react";
+import { useQuizDispatch } from "../../contexts/QuizContext.jsx";
 import { useEffect } from "react";
 
 function StartMenu() {
     //To prevent flash of result being reset when state is reset in the Result page
-    const quiz = useContext(QuizContext);
+    const dispatch = useQuizDispatch();
 
     useEffect(() => {
-        quiz.setQuizResult(0);
+        dispatch({ type:"RESET" });
     }, []);
 
     return (

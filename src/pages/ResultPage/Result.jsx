@@ -1,12 +1,13 @@
 import Image from "../../components/common/Image.jsx";
 import { useNavigate, useParams } from "react-router-dom";
-import { QuizContext } from "../../contexts/QuizContext.jsx";
-import { useContext } from "react";
+import { useQuiz } from "../../contexts/QuizContext.jsx";
 import Button from "../../components/common/Button.jsx";
 
 function Result() {
     const { subject } = useParams();
-    const quiz = useContext(QuizContext);
+    const quizState = useQuiz();
+    const { quizResult } = quizState;
+
     const navigate = useNavigate();
 
     const handlePlayAgain = () => {
@@ -26,7 +27,7 @@ function Result() {
                     <Image subject={subject} page={"/result"} />
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <output className="font-medium text-[88px] md:text-display dark:text-white">
-                            {quiz.quizResult}
+                            {quizResult}
                         </output>
                         <p className="font-regular text-lg text-slate-gray md:text-body-small xxl:text-body-medium dark:text-light-blue">
                             out of 10
