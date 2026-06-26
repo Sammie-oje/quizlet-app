@@ -4,14 +4,12 @@ import { useQuiz } from "../../contexts/QuizContext.jsx";
 import Button from "../../components/common/Button.jsx";
 
 function Result() {
-    const { subject } = useParams();
     const quizState = useQuiz();
     const { quizResult } = quizState;
 
     const navigate = useNavigate();
 
     const handlePlayAgain = () => {
-        sessionStorage.setItem("hasStarted", "false");
         navigate("/", { replace: true });
     };
 
@@ -24,7 +22,7 @@ function Result() {
 
             <article className="flex flex-col gap-3 w-full md:gap-8">
                 <div className="p-8 bg-white flex flex-col justify-center items-center gap-4 rounded-xl md:p-12 md:rounded-3xl md:gap-10 dark:bg-steel-blue">
-                    <Image subject={subject} page={"/result"} />
+                    <Image page={"/result"} />
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <output className="font-medium text-[88px] md:text-display dark:text-white">
                             {quizResult}

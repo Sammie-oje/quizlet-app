@@ -2,17 +2,21 @@ import htmlIcon from "../../assets/images/icon-html.svg";
 import cssIcon from "../../assets/images/icon-css.svg";
 import jsIcon from "../../assets/images/icon-js.svg";
 import accessIcon from "../../assets/images/icon-accessibility.svg";
+import { useQuiz } from "../../contexts/QuizContext.jsx";
 
 const imageMap = {
     HTML: { url: htmlIcon, bgColor: "#FFF1E9" },
     CSS: { url: cssIcon, bgColor: "#E0FDEF" },
-    Javascript: { url: jsIcon, bgColor: "#EBF0FF" },
+    JavaScript: { url: jsIcon, bgColor: "#EBF0FF" },
     Accessibility: { url: accessIcon, bgColor: "#F6E7FF" }
 };
 
-function SubjectImage({ subject, page }) {
-    const imageURL = imageMap[subject]?.url;
-    const bgColor = imageMap[subject]?.bgColor;
+function SubjectImage({ page, subject }) {
+    const quizState = useQuiz();
+    const { selectedSubject } = quizState;
+
+    const imageURL = imageMap[selectedSubject ? selectedSubject : subject]?.url;
+    const bgColor = imageMap[selectedSubject ? selectedSubject : subject]?.bgColor;
     const isHomePage = page === "/";
 
     return (
@@ -26,11 +30,11 @@ function SubjectImage({ subject, page }) {
                 <img
                     className="size-[28.57px] md:size-10"
                     src={imageURL}
-                    alt={`${subject}-icon`}
+                    alt={`${selectedSubject ? selectedSubject : subject}-icon`}
                 />
             </div>
             <span className="text-lg font-medium md:text-heading-small dark:text-white">
-                {subject}
+                {selectedSubject ? selectedSubject : subject}
             </span>
         </div>
     );

@@ -1,36 +1,30 @@
 import { Link } from "react-router-dom";
 import Image from "../../components/common/Image.jsx";
+import { useQuizDispatch, useQuiz } from "../../contexts/QuizContext.jsx";
 
 function SubjectList() {
-    const handleStart = () => {
-        sessionStorage.setItem("hasStarted", "true");
-    };
+    const dispatch = useQuizDispatch();
+    const quizState = useQuiz();
+    const { allQuestions } = quizState;
 
     return (
         <ul className="flex flex-col gap-3 md:gap-6">
-            <Link to="/quiz/HTML" replace onClick={handleStart}>
-                <Subject>
-                    <Image page={""} subject={"HTML"} />
-                </Subject>
-            </Link>
-
-            <Link to="/quiz/CSS" replace onClick={handleStart}>
-                <Subject>
-                    <Image page={""} subject={"CSS"} />
-                </Subject>
-            </Link>
-
-            <Link to="/quiz/Javascript" replace onClick={handleStart}>
-                <Subject>
-                    <Image page={""} subject={"Javascript"} />
-                </Subject>
-            </Link>
-
-            <Link to="/quiz/Accessibility" replace onClick={handleStart}>
-                <Subject>
-                    <Image page={""} subject={"Accessibility"} />
-                </Subject>
-            </Link>
+            {allQuestions.quizzes.map(quiz => (
+                <Link
+                    to="/quiz/"
+                    replace
+                    onClick={() =>
+                        dispatch({
+                            type: "SELECT_SUBJECT",
+                            payload: quiz.title
+                        })
+                    }
+                >
+                    <Subject>
+                        <Image page={""} subject={quiz.title} />
+                    </Subject>
+                </Link>
+            ))}
         </ul>
     );
 }

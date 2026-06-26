@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import data from "../assets/data.json";
 
 const QuizContext = createContext(null);
 const QuizDispatchContext = createContext(null);
@@ -42,17 +43,37 @@ function quizReducer(quizState, action) {
                 selectedId: action.payload
             };
         case "SUBMIT_ANSWER":
-            if (quizState.selectedId === null) return { ...quizState, showAlert: true };
+            if (quizState.selectedId === null)
+                return { ...quizState, showAlert: true };
 
             return {
                 ...quizState,
                 showAlert: false,
                 isOptionCorrect: action.payload
             };
+        case "SELECT_SUBJECT":
+            const chosenSubject = data.quizzes.filter(
+                quiz =>
+                    quiz.title.toLowerCase() === action.payload.toLowerCase()
+            );
+
+            return {
+                ...quizState,
+                selectedSubject: action.payload,
+                selectedQuestions: chosenSubject
+                    ? chosenSubject[0].questions
+                    : []
+            };
         case "RESET":
             return {
                 ...quizState,
-                quizResult: 0
+                quizResult: 0,
+                questionIndex: 0,
+                selectedId: null,
+                isOptionCorrect: null,
+                showAlert: false,
+                selectedQuestions: [],
+    selectedSubject: "",
             };
         default:
             return quizState;
@@ -60,6 +81,9 @@ function quizReducer(quizState, action) {
 }
 
 const initialState = {
+    allQuestions: data,
+    selectedQuestions: [],
+    selectedSubject: "",
     quizResult: 0,
     questionIndex: 0,
     selectedId: null,

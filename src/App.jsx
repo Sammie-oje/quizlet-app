@@ -1,5 +1,5 @@
 import StartMenu from "./pages/StartMenu/StartMenu.jsx";
-import Question, { quizLoader } from "./pages/QuizPage/Question.jsx";
+import Question from "./pages/QuizPage/Question.jsx";
 import Result from "./pages/ResultPage/Result.jsx";
 import RootLayout from "./layout/RootLayout.jsx";
 
@@ -11,22 +11,16 @@ import {
 } from "react-router-dom";
 
 const router = createBrowserRouter(
-        createRoutesFromElements(
-            <Route path="/" element={<RootLayout />}>
-                <Route index element={<StartMenu />} />
-                <Route
-                    path="quiz/:subject"
-                    element={<Question />}
-                    loader={quizLoader}
-                />
-                <Route path="result/:subject" element={<Result />} />
-            </Route>
-        )
-    );
-    
+    createRoutesFromElements(
+        <Route path="/" element={<RootLayout />}>
+            <Route index element={<StartMenu />} />
+            <Route path="quiz/" element={<Question />}/>
+            <Route path="result/" element={<Result />} />
+        </Route>
+    )
+);
 
 function App() {
-    
     return <RouterProvider router={router} />;
 }
 
