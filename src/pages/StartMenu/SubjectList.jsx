@@ -6,19 +6,23 @@ function SubjectList() {
     const dispatch = useQuizDispatch();
     const quizState = useQuiz();
     const { allQuestions } = quizState;
+    
 
     return (
         <ul className="flex flex-col gap-3 md:gap-6">
             {allQuestions.quizzes.map(quiz => (
                 <Link
-                    to="/quiz/"
+                    key={quiz.title}
+                    to="/quiz"
                     replace
-                    onClick={() =>
+                    onClick={() => {
                         dispatch({
                             type: "SELECT_SUBJECT",
                             payload: quiz.title
-                        })
-                    }
+                        });
+                        console.log(quiz.title);
+                    }}
+                    state={{ direction: "next" }}
                 >
                     <Subject>
                         <Image page={""} subject={quiz.title} />

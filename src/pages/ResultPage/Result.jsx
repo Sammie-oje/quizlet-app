@@ -1,16 +1,18 @@
 import Image from "../../components/common/Image.jsx";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuiz } from "../../contexts/QuizContext.jsx";
+import { useQuiz, useQuizDispatch } from "../../contexts/QuizContext.jsx";
 import Button from "../../components/common/Button.jsx";
 
 function Result() {
     const quizState = useQuiz();
-    const { quizResult } = quizState;
+    const dispatch = useQuizDispatch();
 
+    const { quizResult, selectedSubject } = quizState;
     const navigate = useNavigate();
 
     const handlePlayAgain = () => {
-        navigate("/", { replace: true });
+        dispatch({ type: "RESET" });
+        navigate("/", { replace: true, state: { direction: "next" } });
     };
 
     return (
@@ -22,7 +24,7 @@ function Result() {
 
             <article className="flex flex-col gap-3 w-full md:gap-8">
                 <div className="p-8 bg-white flex flex-col justify-center items-center gap-4 rounded-xl md:p-12 md:rounded-3xl md:gap-10 dark:bg-steel-blue">
-                    <Image page={"/result"} />
+                    <Image page={"/result"} subject={selectedSubject} />
                     <div className="flex flex-col gap-4 items-center justify-center">
                         <output className="font-medium text-[88px] md:text-display dark:text-white">
                             {quizResult}

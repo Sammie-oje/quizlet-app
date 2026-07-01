@@ -52,7 +52,7 @@ function quizReducer(quizState, action) {
                 isOptionCorrect: action.payload
             };
         case "SELECT_SUBJECT":
-            const chosenSubject = data.quizzes.filter(
+            const chosenSubject = quizState.allQuestions.quizzes.find(
                 quiz =>
                     quiz.title.toLowerCase() === action.payload.toLowerCase()
             );
@@ -60,9 +60,7 @@ function quizReducer(quizState, action) {
             return {
                 ...quizState,
                 selectedSubject: action.payload,
-                selectedQuestions: chosenSubject
-                    ? chosenSubject[0].questions
-                    : []
+                selectedQuestions: chosenSubject ? chosenSubject.questions : []
             };
         case "RESET":
             return {
@@ -73,7 +71,7 @@ function quizReducer(quizState, action) {
                 isOptionCorrect: null,
                 showAlert: false,
                 selectedQuestions: [],
-    selectedSubject: "",
+                selectedSubject: ""
             };
         default:
             return quizState;

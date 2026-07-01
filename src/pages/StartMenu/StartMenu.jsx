@@ -1,15 +1,7 @@
 import SubjectList from "./SubjectList.jsx";
-import { useQuizDispatch } from "../../contexts/QuizContext.jsx";
-import { useEffect } from "react";
 
 function StartMenu() {
-    //To prevent flash of result being reset when state is reset in the Result page
-    const dispatch = useQuizDispatch();
-
-    useEffect(() => {
-        dispatch({ type:"RESET" });
-    }, []);
-
+  
     return (
         <section className="w-full pt-8 px-6 grid gap-10 md:gap-16 xxl:grid-cols-2 xxl:gap-[131px]">
             <div className="flex gap-4 flex-col xxl:gap-12">

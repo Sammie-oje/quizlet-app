@@ -87,7 +87,7 @@ function Question() {
                     </ul>
 
                     {hasSubmitted && isLastQuestion ? (
-                        <Link to="/result/">
+                        <Link to="/result" state={{ direction: "next" }}>
                             <Button>Submit Quiz</Button>
                         </Link>
                     ) : hasSubmitted ? (
