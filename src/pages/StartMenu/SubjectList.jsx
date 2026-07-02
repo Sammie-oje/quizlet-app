@@ -15,13 +15,12 @@ function SubjectList() {
                     key={quiz.title}
                     to="/quiz"
                     replace
-                    onClick={() => {
+                    onClick={() => 
                         dispatch({
                             type: "SELECT_SUBJECT",
                             payload: quiz.title
-                        });
-                        console.log(quiz.title);
-                    }}
+                        })
+                        }
                     state={{ direction: "next" }}
                 >
                     <Subject>

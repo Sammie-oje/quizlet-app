@@ -1,6 +1,5 @@
 import inCorrectIcon from "../../assets/images/icon-incorrect.svg";
 import correctIcon from "../../assets/images/icon-correct.svg";
-import { useQuiz} from "../../contexts/QuizContext.jsx";
 
 function AnswerList({
     answer,

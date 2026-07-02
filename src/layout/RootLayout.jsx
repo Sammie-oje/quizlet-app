@@ -1,8 +1,15 @@
 import Header from "../components/common/Header.jsx";
 import Image from "../components/common/Image.jsx";
-import { useLocation, Outlet, useNavigationType } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useOutlet, useNavigationType } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { useQuiz } from "../contexts/QuizContext.jsx";
+
+function AnimatedOutlet() {
+    const o = useOutlet();
+    const [outlet] = useState(o);
+    return <>{outlet}</>;
+}
 
 function RootLayout() {
     const quizState = useQuiz();
@@ -35,45 +42,34 @@ function RootLayout() {
     } else if (navType === "POP") {
         direction = "back";
     }
+
     return (
         <>
             <Header>
-                <Image page={pathname} subject={selectedSubject}/>
+                <Image page={pathname} subject={selectedSubject} />
             </Header>
 
-            <main
-                style={{
-                    position: "relative",
-                    overflow: "hidden",
-                    minHeight: "100vh"
-                }}
+            <AnimatePresence
+                mode="popLayout"
+                custom={direction}
+                initial={false}
             >
-                <AnimatePresence
-                    mode="popLayout"
+                <motion.div
+                    key={pathname}
                     custom={direction}
-                    initial={false}
+                    variants={pageVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{
+                        duration: 0.25,
+                        ease: [0.22, 1, 0.36, 1]
+                    }}
+                    
                 >
-                    <motion.div
-                        key={pathname}
-                        custom={direction}
-                        variants={pageVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        transition={{
-                            duration: 0.25,
-                            ease: [0.22, 1, 0.36, 1]
-                        }}
-                        style={{
-                            position: "absolute",
-                            inset: 0,
-                            width: "100%"
-                        }}
-                    >
-                        <Outlet />
-                    </motion.div>
-                </AnimatePresence>
-            </main>
+                    <AnimatedOutlet key={pathname} />
+                </motion.div>
+            </AnimatePresence>
         </>
     );
 }
