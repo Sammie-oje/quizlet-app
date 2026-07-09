@@ -53,8 +53,6 @@ function Question() {
         });
     }
 
-    console.log("Quiz has being rendered");
-
     return (
         <section className="pt-8 px-6 grid gap-10 w-full md:gap-16 xxl:grid-cols-2 xxl:gap-[131px]">
             <fieldset className="contents">

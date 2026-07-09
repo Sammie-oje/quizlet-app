@@ -14,7 +14,7 @@ function Result() {
         dispatch({ type: "RESET" });
         navigate("/", { replace: true, state: { direction: "next" } });
     };
-    console.log("Result has being rendered");
+
 
     return (
         <section className="px-6 pt-8 w-full flex flex-col gap-10 md:gap-16 xxl:flex-row xxl:gap-[11.5rem] xxl:px-0">

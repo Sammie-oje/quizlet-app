@@ -1,7 +1,6 @@
 import SubjectList from "./SubjectList.jsx";
 
 function StartMenu() {
-  console.log("Home has being rendered")
     return (
         <section className="w-full pt-8 px-6 grid gap-10 md:gap-16 xxl:grid-cols-2 xxl:gap-[131px]">
             <div className="flex gap-4 flex-col xxl:gap-12">
