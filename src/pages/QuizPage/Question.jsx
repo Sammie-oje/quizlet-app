@@ -5,6 +5,7 @@ import AnswerList from "./AnswerList.jsx";
 import { Link } from "react-router-dom";
 import { useQuizDispatch, useQuiz } from "../../contexts/QuizContext.jsx";
 import { evaluateSelectedOption } from "../../utils/evaluateSelectedOption.js";
+import { ProtectedRoute } from "../../components/common/ProtectedRoute.jsx";
 
 function Question() {
     const dispatch = useQuizDispatch();
@@ -22,7 +23,7 @@ function Question() {
     const currentQuestionObj = selectedQuestions[questionIndex];
     const isLastQuestion = questionIndex >= 9;
     const hasSubmitted = isOptionCorrect !== null;
-    const correctOption = currentQuestionObj.answer;
+    const correctOption = currentQuestionObj?.answer;
 
     function handleNextQuestion() {
         dispatch({ type: "NEXT_QUESTION" });
@@ -54,6 +55,7 @@ function Question() {
     }
 
     return (
+      <ProtectedRoute>
         <section className="pt-8 px-6 grid gap-10 w-full md:gap-16 xxl:grid-cols-2 xxl:gap-[131px]">
             <fieldset className="contents">
                 <div className="flex flex-col gap-6 md:gap-10 xxl:gap-[123px]">
@@ -62,7 +64,7 @@ function Question() {
                             Question {questionIndex + 1} of 10
                         </span>
                         <h3 className="text-xl/[1.2] font-medium text-dark-slate md:text-4xl/[1.2] xxl:text-heading-medium dark:text-white">
-                            {currentQuestionObj.question}
+                            {currentQuestionObj?.question}
                         </h3>
                     </legend>
                     <ProgressBar percent={(questionIndex + 1) * 10} />
@@ -73,7 +75,7 @@ function Question() {
                         className="flex flex-col gap-3 md:gap-6"
                         onClick={e => handleSelectedOption(e)}
                     >
-                        {currentQuestionObj.options.map((option, index) => (
+                        {currentQuestionObj?.options.map((option, index) => (
                             <AnswerList
                                 answer={option}
                                 key={index}
@@ -102,6 +104,7 @@ function Question() {
                 </div>
             </fieldset>
         </section>
+        </ProtectedRoute>
     );
 }
 
