@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useLocation, useOutlet, useNavigationType } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { useQuiz } from "../contexts/QuizContext.jsx";
-import AlertDialog from "../components/quiz/AlertDialog.jsx";
 
 function AnimatedOutlet() {
     const o = useOutlet();
