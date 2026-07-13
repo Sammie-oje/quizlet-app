@@ -25,7 +25,9 @@ function Question() {
     const isLastQuestion = questionIndex >= 9;
     const hasSubmitted = isOptionCorrect !== null;
     const correctOption = currentQuestionObj?.answer;
-    const blocker = useBlocker(true);
+    const blocker = useBlocker(({ historyAction }) => {
+        return historyAction === "POP";
+    });
 
     function handleNextQuestion() {
         dispatch({ type: "NEXT_QUESTION" });
@@ -109,7 +111,7 @@ function Question() {
                     </div>
                 </fieldset>
             </section>
-           {blocker.state==="blocked" && <AlertDialog blocker={blocker} />}
+            {blocker.state === "blocked" && <AlertDialog blocker={blocker} />}
         </ProtectedRoute>
     );
 }
